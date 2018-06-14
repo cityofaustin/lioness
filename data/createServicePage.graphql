@@ -2,11 +2,18 @@ mutation {
   createServicePage(
     title: "blarg"
     slug: "blarg"
-    topic: { slug: "blarg", text: "blarg" }
+    topic: {
+      slug: "blarg"
+      text: "blarg"
+      theme: { slug: "blarg", text: "blarg" }
+    }
   ) {
     id
     topic {
       id
+      theme {
+        id
+      }
     }
   }
 }

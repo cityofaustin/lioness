@@ -1,6 +1,3 @@
-# The following types define the data model of the example service
-# based on which the GraphQL API is generated
-
 type ServicePage @model {
   id: ID! @isUnique
   title: String!
@@ -12,7 +9,15 @@ type Topic @model {
   id: ID! @isUnique
   slug: String!
   text: String!
+  theme: Theme! @relation(name: "TopicTheme")
 
-  # Every relation also required a back-relation (to determine 1:1, 1:n or n:m)
   servicePages: [ServicePage!]! @relation(name: "ServicePageTopic")
+}
+
+type Theme @model {
+  id: ID! @isUnique
+  slug: String!
+  text: String!
+
+  topics: [Topic!]! @relation(name: "TopicTheme")
 }
