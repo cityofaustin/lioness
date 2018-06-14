@@ -1,23 +1,18 @@
 # The following types define the data model of the example service
 # based on which the GraphQL API is generated
 
-type User @model {
+type ServicePage @model {
   id: ID! @isUnique
-  name: String
-  dateOfBirth: DateTime
-
-  # Uncomment below - you can declare relations between models like this
-
-  # posts: [Post!]! @relation(name: "UserPosts")
+  title: String!
+  slug: String!
+  topic: Topic! @relation(name: "ServicePageTopic")
 }
 
+type Topic @model {
+  id: ID! @isUnique
+  slug: String!
+  text: String!
 
-# Uncomment the model below as well
-
-# type Post @model {
-#   id: ID! @isUnique
-#   title: String!
-#
-#   # Every relation also required a back-relation (to determine 1:1, 1:n or n:m)
-#   author: User! @relation(name: "UserPosts")
-# }
+  # Every relation also required a back-relation (to determine 1:1, 1:n or n:m)
+  servicePages: [ServicePage!]! @relation(name: "ServicePageTopic")
+}

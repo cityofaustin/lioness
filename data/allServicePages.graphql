@@ -1,0 +1,12 @@
+{
+  allServicePages {
+    id
+    title
+    slug
+    topic {
+      id
+      slug
+      text
+    }
+  }
+}

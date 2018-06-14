@@ -1,0 +1,12 @@
+mutation {
+  createServicePage(
+    title: "blarg"
+    slug: "blarg"
+    topic: { slug: "blarg", text: "blarg" }
+  ) {
+    id
+    topic {
+      id
+    }
+  }
+}

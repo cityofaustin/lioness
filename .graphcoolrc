@@ -1,1 +1,3 @@
-{}
+targets:
+  dev: local/cjif6414i00040100hr142zf5
+  default: dev
