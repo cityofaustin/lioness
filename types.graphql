@@ -6,8 +6,10 @@ type ServicePage @model {
   steps: String!
   dynamicContent: Json!
   additionalContent: String!
-  relatedServicePages: [ServicePage!]! @relation(name: "RelatedServicePages")
   image: Image @relation(name: "ServicePageImage")
+  contacts: [Contact!]! @relation(name: "ServicePageContacts")
+
+  relatedServicePages: [ServicePage!]! @relation(name: "RelatedServicePages")
 }
 
 type Topic @model {
@@ -31,5 +33,56 @@ type Image @model {
   id: ID! @isUnique
   filename: String!
   title: String!
+
   servicePages: [ServicePage!]! @relation(name: "ServicePageImage")
+}
+
+type Contact @model {
+  id: ID! @isUnique
+  name: String!
+  email: String!
+  phone: String!
+  hours: [ContactDayAndDuration!]! @relation(name: "ContactHours")
+  location: Location @relation(name: "ContactLocation")
+
+  servicePages: [ServicePage!]! @relation(name: "ServicePageContacts")
+}
+
+type ContactDayAndDuration @model {
+  id: ID! @isUnique
+  dayOfWeek: DayAndDurationDayOfWeek
+  startTime: DateTime!
+  endTime: DateTime!
+
+  contacts: [Contact!]! @relation(name: "ContactHours")
+}
+
+enum DayAndDurationDayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+type Location @model {
+  id: ID! @isUnique
+  name: String!
+  street: String!
+  city: String!
+  state: LocationState
+  country: LocationCountry
+  zip: String!
+
+  contacts: [Contact!]! @relation(name: "ContactLocation")
+}
+
+enum LocationState {
+  TX
+}
+
+enum LocationCountry {
+  UNITED_STATES
 }
