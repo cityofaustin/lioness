@@ -7,11 +7,30 @@ mutation {
       text: "blarg"
       theme: { slug: "blarg", text: "blarg" }
     }
+    steps: "blarg"
+    dynamicContent: "{\"blarg\": \"blarg\"}"
+    additionalContent: "blarg"
+    image: { title: "blarg", filename: "blarg" }
   ) {
     id
     topic {
       id
+      servicePages {
+        id
+      }
       theme {
+        id
+        topics {
+          id
+          theme {
+            id
+          }
+        }
+      }
+    }
+    image {
+      id
+      servicePages {
         id
       }
     }

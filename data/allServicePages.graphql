@@ -13,5 +13,17 @@
         text
       }
     }
+    steps
+    dynamicContent
+    additionalContent
+    relatedServicePages {
+      slug
+      title
+    }
+    image {
+      id
+      filename
+      title
+    }
   }
 }

@@ -3,6 +3,11 @@ type ServicePage @model {
   title: String!
   slug: String!
   topic: Topic! @relation(name: "ServicePageTopic")
+  steps: String!
+  dynamicContent: Json!
+  additionalContent: String!
+  relatedServicePages: [ServicePage!]! @relation(name: "RelatedServicePages")
+  image: Image @relation(name: "ServicePageImage")
 }
 
 type Topic @model {
@@ -20,4 +25,11 @@ type Theme @model {
   text: String!
 
   topics: [Topic!]! @relation(name: "TopicTheme")
+}
+
+type Image @model {
+  id: ID! @isUnique
+  filename: String!
+  title: String!
+  servicePages: [ServicePage!]! @relation(name: "ServicePageImage")
 }
