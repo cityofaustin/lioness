@@ -17,6 +17,8 @@ type Topic @model {
   slug: String!
   text: String!
   theme: Theme! @relation(name: "TopicTheme")
+  description: String! @migrationValue(value: "blarg")
+  callToAction: String! @migrationValue(value: "blarg")
 
   servicePages: [ServicePage!]! @relation(name: "ServicePageTopic")
 }
@@ -25,6 +27,7 @@ type Theme @model {
   id: ID! @isUnique
   slug: String!
   text: String!
+  description: String! @migrationValue(value: "blarg")
 
   topics: [Topic!]! @relation(name: "TopicTheme")
 }
@@ -46,6 +49,7 @@ type Contact @model {
   location: Location @relation(name: "ContactLocation")
 
   servicePages: [ServicePage!]! @relation(name: "ServicePageContacts")
+  departments: [Department!]! @relation(name: "DepartmentContacts")
 }
 
 type ContactDayAndDuration @model {
@@ -85,4 +89,19 @@ enum LocationState {
 
 enum LocationCountry {
   UNITED_STATES
+}
+
+type ThreeOneOne @model {
+  id: ID! @isUnique
+  title: String!
+  url: String!
+}
+
+type Department @model {
+  id: ID! @isUnique
+  slug: String!
+  name: String!
+  mission: String!
+
+  contacts: [Contact!]! @relation(name: "DepartmentContacts")
 }
