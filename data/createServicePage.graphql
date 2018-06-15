@@ -1,6 +1,6 @@
-mutation {
+mutation createServicePage($title: String!) {
   createServicePage(
-    title: "blarg"
+    title: $title
     slug: "blarg"
     topic: {
       slug: "blarg"
@@ -11,6 +11,22 @@ mutation {
     dynamicContent: "{\"blarg\": \"blarg\"}"
     additionalContent: "blarg"
     image: { title: "blarg", filename: "blarg" }
+    contacts: [
+      {
+        name: "blarg"
+        email: "blarg"
+        phone: "blarg"
+        hours: { dayOfWeek: MONDAY, startTime: "T10:00", endTime: "T15:00" }
+        location: {
+          name: "blarg"
+          street: "blarg"
+          city: "blarg"
+          state: TX
+          country: UNITED_STATES
+          zip: "blarg"
+        }
+      }
+    ]
   ) {
     id
     topic {
@@ -31,6 +47,15 @@ mutation {
     image {
       id
       servicePages {
+        id
+      }
+    }
+    contacts {
+      id
+      location {
+        id
+      }
+      hours {
         id
       }
     }

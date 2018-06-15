@@ -25,5 +25,23 @@
       filename
       title
     }
+    contacts {
+      name
+      email
+      phone
+      hours {
+        dayOfWeek
+        startTime
+        endTime
+      }
+      location {
+        name
+        street
+        city
+        state
+        zip
+        country
+      }
+    }
   }
 }
