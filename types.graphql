@@ -44,7 +44,10 @@ type Contact @model {
   id: ID! @isUnique
   name: String!
   email: String!
-  phone: String!
+  phone: Json!
+    @migrationValue(
+      value: "{\"default\": \"512-974-2000\", \"n11\": 311, \"tty\": \"512-972-9848\"}"
+    )
   hours: [ContactDayAndDuration!]! @relation(name: "ContactHours")
   location: Location @relation(name: "ContactLocation")
 
