@@ -6,9 +6,10 @@ import CreateThreeOneOne from "./CreateThreeOneOne";
 import CreateLocation from "./CreateLocation";
 import CreateContact from "./CreateContact";
 import CreateDepartment from "./CreateDepartment";
+import CreateTheme from "./CreateTheme";
 
 const gqlEndpoint =
-  "http://localhost:60000/simple/v1/cjik105mb00040138ln3a07a0";
+  "http://localhost:60000/simple/v1/cjik1jqri000401381bkzsrti";
 
 const populateData = async () => {
   // Add 311s
@@ -105,6 +106,27 @@ const populateData = async () => {
           contactId
         );
       })
+    );
+  } catch (e) {
+    console.log(e);
+  }
+
+  // Add Themes
+  let themesWithIds;
+  try {
+    const themes = yaml.safeLoad(
+      fs.readFileSync("./data/fixtures/themes.yaml", "utf8")
+    );
+
+    themesWithIds = await Promise.all(
+      themes.themes.map(theme =>
+        CreateTheme(
+          gqlEndpoint,
+          theme.text_en,
+          theme.description_en || "",
+          theme.slug
+        )
+      )
     );
   } catch (e) {
     console.log(e);
