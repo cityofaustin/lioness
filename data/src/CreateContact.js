@@ -36,7 +36,7 @@ const CreateContact = async (
     hours
   };
   const data = await request(endpoint, query, variables);
-  return data;
+  return data.createContact;
 };
 
 export default CreateContact;

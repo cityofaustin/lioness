@@ -5,9 +5,10 @@ import yaml from "js-yaml";
 import CreateThreeOneOne from "./CreateThreeOneOne";
 import CreateLocation from "./CreateLocation";
 import CreateContact from "./CreateContact";
+import CreateDepartment from "./CreateDepartment";
 
 const gqlEndpoint =
-  "http://localhost:60000/simple/v1/cjijzpy6i000401255p0xxuv1";
+  "http://localhost:60000/simple/v1/cjik105mb00040138ln3a07a0";
 
 const populateData = async () => {
   // Add 311s
@@ -76,6 +77,32 @@ const populateData = async () => {
           contact.email,
           locationId,
           formattedHours
+        );
+      })
+    );
+  } catch (e) {
+    console.log(e);
+  }
+
+  // Add Departments
+  let departmentsWithIds;
+  try {
+    const departments = yaml.safeLoad(
+      fs.readFileSync("./data/fixtures/departments.yaml", "utf8")
+    );
+
+    departmentsWithIds = await Promise.all(
+      departments.departments.map(department => {
+        const contactId =
+          department.contact &&
+          contactsWithIds.find(c => c.name === department.contact.toString())
+            .id;
+        return CreateDepartment(
+          gqlEndpoint,
+          department.name_en,
+          department.mission_en,
+          department.slug,
+          contactId
         );
       })
     );
