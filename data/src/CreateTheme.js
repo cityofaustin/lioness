@@ -5,6 +5,7 @@ const CreateTheme = async (endpoint, text, description, slug) => {
     mutation($text: String!, $description: String!, $slug: String!) {
       createTheme(text: $text, description: $description, slug: $slug) {
         id
+        slug
       }
     }
   `;
@@ -14,7 +15,7 @@ const CreateTheme = async (endpoint, text, description, slug) => {
     slug
   };
   const data = await request(endpoint, query, variables);
-  return data;
+  return data.createTheme;
 };
 
 export default CreateTheme;

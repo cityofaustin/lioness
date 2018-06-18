@@ -7,9 +7,10 @@ import CreateLocation from "./CreateLocation";
 import CreateContact from "./CreateContact";
 import CreateDepartment from "./CreateDepartment";
 import CreateTheme from "./CreateTheme";
+import CreateTopic from "./CreateTopic";
 
 const gqlEndpoint =
-  "http://localhost:60000/simple/v1/cjik1jqri000401381bkzsrti";
+  "http://localhost:60000/simple/v1/cjik2trmu000401064pgwlr99";
 
 const populateData = async () => {
   // Add 311s
@@ -127,6 +128,33 @@ const populateData = async () => {
           theme.slug
         )
       )
+    );
+  } catch (e) {
+    console.log(e);
+  }
+
+  // Add Topics
+  let topicsWithIds;
+  try {
+    const topics = yaml.safeLoad(
+      fs.readFileSync("./data/fixtures/topics.yaml", "utf8")
+    );
+
+    topicsWithIds = await Promise.all(
+      topics.topics.map(topic => {
+        debugger;
+        const themeId =
+          topic.theme && themesWithIds.find(t => t.slug === topic.theme).id;
+
+        return CreateTopic(
+          gqlEndpoint,
+          topic.text_en,
+          topic.description_en || "",
+          topic.call_to_action_en || "",
+          topic.slug,
+          themeId
+        );
+      })
     );
   } catch (e) {
     console.log(e);

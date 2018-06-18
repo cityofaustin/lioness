@@ -16,7 +16,7 @@ type Topic @model {
   id: ID! @isUnique
   slug: String!
   text: String!
-  theme: Theme! @relation(name: "TopicTheme")
+  theme: Theme @relation(name: "TopicTheme")
   description: String! @migrationValue(value: "blarg")
   callToAction: String! @migrationValue(value: "blarg")
 
