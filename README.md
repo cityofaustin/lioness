@@ -7,3 +7,6 @@ A Graphcool based backend for [janis](https://github.com/cityofaustin/janis) and
 * Spin up a local graphcool cluster: `graphcool local up`
 * Deploy locally: `graphcool deploy`
   * Make sure to select local as the target
+* Populate the db:
+  * Set `gqlEndpoint` in [populateData.js](data/src/populateData.js)
+  * Run `yarn populate-db`
