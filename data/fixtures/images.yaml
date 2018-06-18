@@ -1,42 +1,42 @@
 images:
     -
-        filename: fixtures/images/lady-bird-lake.jpg
+        filename: lady-bird-lake
         alt_text_en: it's a lake
         alt_text_es:
         alt_text_vi:
         alt_text_ar:
     -
-        filename: fixtures/images/paint.jpg
+        filename: paint
         alt_text_en: Bucket of Austin ReBlend paint
         alt_text_es: Bote de pintura látex sin brillo Austin ReBlend
         alt_text_vi: Thùng sơn Austin Reblend mủ ánh mờ
         alt_text_ar: دلو Austin Reblend من دهانات اللاتكس غير اللامعة
     -
-        filename: fixtures/images/household-hazardous-waste.jpg
+        filename: household-hazardous-waste
         alt_text_en: Household Hazardous Waste
         alt_text_es: Bote de pintura látex sin brillo Austin ReBlend
         alt_text_vi: Thùng sơn Austin Reblend mủ ánh mờ
         alt_text_ar: دلو Austin Reblend من دهانات اللاتكس غير اللامعة
     -
-        filename: fixtures/images/curbside-pickup.jpg
+        filename: curbside-pickup
         alt_text_en: Curbside Pickup
         alt_text_es:
         alt_text_vi:
         alt_text_ar:
     -
-        filename: fixtures/images/bulk-items.jpg
+        filename: bulk-items
         alt_text_en: Bulk Items at the Curb
         alt_text_es:
         alt_text_vi:
         alt_text_ar:
     -
-        filename: fixtures/images/curbside-compost.jpg
+        filename: curbside-compost
         alt_text_en: Curbside Compost Pickup
         alt_text_es:
         alt_text_vi:
         alt_text_ar:
     -
-        filename: fixtures/images/arr-department.jpg
+        filename: arr-department
         alt_text_en: Austin Resource Recovery Truck
         alt_text_es:
         alt_text_vi:

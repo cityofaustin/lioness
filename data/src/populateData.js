@@ -5,12 +5,13 @@ import yaml from "js-yaml";
 import CreateThreeOneOne from "./CreateThreeOneOne";
 import CreateLocation from "./CreateLocation";
 import CreateContact from "./CreateContact";
+import CreateImage from "./CreateImage";
 import CreateDepartment from "./CreateDepartment";
 import CreateTheme from "./CreateTheme";
 import CreateTopic from "./CreateTopic";
 
 const gqlEndpoint =
-  "http://localhost:60000/simple/v1/cjik2trmu000401064pgwlr99";
+  "http://localhost:60000/simple/v1/cjik4uznn00040196mntauni6";
 
 const populateData = async () => {
   // Add 311s
@@ -86,6 +87,22 @@ const populateData = async () => {
     console.log(e);
   }
 
+  // Add Images
+  let imagesWithIds;
+  try {
+    const images = yaml.safeLoad(
+      fs.readFileSync("./data/fixtures/images.yaml", "utf8")
+    );
+
+    imagesWithIds = await Promise.all(
+      images.images.map(image =>
+        CreateImage(gqlEndpoint, image.filename, image.alt_text_en)
+      )
+    );
+  } catch (e) {
+    console.log(e);
+  }
+
   // Add Departments
   let departmentsWithIds;
   try {
@@ -99,12 +116,19 @@ const populateData = async () => {
           department.contact &&
           contactsWithIds.find(c => c.name === department.contact.toString())
             .id;
+
+        debugger;
+        const imageId =
+          department.image &&
+          imagesWithIds.find(i => i.filename === department.image).id;
+
         return CreateDepartment(
           gqlEndpoint,
           department.name_en,
           department.mission_en,
           department.slug,
-          contactId
+          contactId,
+          imageId
         );
       })
     );
@@ -159,6 +183,21 @@ const populateData = async () => {
   } catch (e) {
     console.log(e);
   }
+
+  // // Add Services
+  // let servicesWithIds;
+  // try {
+  //   fs.readdir("./data/fixtures/services/", (err, servicePaths) => {
+  //     servicePaths.forEach(filename => {
+  //       const service = yaml.safeLoad(
+  //         fs.readFileSync(`./data/fixtures/services/${filename}`, "utf8")
+  //       );
+  //       console.log(service);
+  //     });
+  //   });
+  // } catch (e) {
+  //   console.log(e);
+  // }
 };
 
 populateData();

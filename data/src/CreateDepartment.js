@@ -1,13 +1,21 @@
 import { request } from "graphql-request";
 
-const CreateDepartment = async (endpoint, name, mission, slug, contactId) => {
+const CreateDepartment = async (
+  endpoint,
+  name,
+  mission,
+  slug,
+  contactId,
+  imageId
+) => {
   const query = `
-    mutation($name: String!, $mission: String!, $slug: String!, $contactIds: [ID!]) {
+    mutation($name: String!, $mission: String!, $slug: String!, $contactIds: [ID!], $imageId:ID) {
       createDepartment(
         name: $name
         mission: $mission
         slug: $slug
         contactsIds: $contactIds
+        imageId: $imageId
       ) {
         id
       }
@@ -23,7 +31,8 @@ const CreateDepartment = async (endpoint, name, mission, slug, contactId) => {
     name,
     mission,
     slug,
-    contactIds
+    contactIds,
+    imageId
   };
   const data = await request(endpoint, query, variables);
   return data;

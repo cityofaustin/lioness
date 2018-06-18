@@ -38,6 +38,7 @@ type Image @model {
   title: String!
 
   servicePages: [ServicePage!]! @relation(name: "ServicePageImage")
+  departments: [Department!]! @relation(name: "DepartmentImage")
 }
 
 type Contact @model {
@@ -105,6 +106,7 @@ type Department @model {
   slug: String!
   name: String!
   mission: String!
+  image: Image @relation(name: "DepartmentImage")
 
   contacts: [Contact!]! @relation(name: "DepartmentContacts")
 }
