@@ -1,1 +1,4 @@
 .graphcoolrc
+node_modules
+data/out
+yarn-error.log

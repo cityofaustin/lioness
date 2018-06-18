@@ -1,5 +1,15 @@
 {
   "name": "lioness",
   "version": "1.0.0",
-  "description": "My Graphcool Service"
+  "description": "My Graphcool Service",
+  "scripts": {
+    "build": "babel ./data/src -d ./data/out",
+    "populate-db": "yarn build; node data/out/populateData.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "graphql-request": "^1.6.0"
+  }
 }
