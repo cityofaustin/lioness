@@ -4,7 +4,11 @@
   "description": "My Graphcool Service",
   "scripts": {
     "build": "babel ./data/src -d ./data/out",
-    "populate-db": "yarn build; node data/out/populateData.js"
+    "populate-db": "yarn build; node data/out/populateData.js",
+    "populate-db-debug":
+      "yarn build; node --inspect-brk data/out/populateData.js",
+    "clear-and-redeploy":
+      "./data/scripts/resetData.sh; graphcool local up; graphcool deploy"
   },
   "dependencies": {},
   "devDependencies": {

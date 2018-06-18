@@ -27,6 +27,7 @@ const CreateLocation = async (
         zip: $zip
       ) {
         id
+        name
       }
     }
   `;
@@ -39,7 +40,7 @@ const CreateLocation = async (
     zip
   };
   const data = await request(endpoint, query, variables);
-  return data;
+  return data.createLocation;
 };
 
 export default CreateLocation;

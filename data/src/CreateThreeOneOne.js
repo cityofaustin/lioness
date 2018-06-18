@@ -5,6 +5,7 @@ const CreateThreeOneOne = async (endpoint, title, url) => {
     mutation($title:String!, $url:String!) {
       createThreeOneOne(title:$title, url:$url) {
         id
+        title
       }
     }
   `;
