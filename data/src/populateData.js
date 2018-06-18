@@ -9,9 +9,10 @@ import CreateImage from "./CreateImage";
 import CreateDepartment from "./CreateDepartment";
 import CreateTheme from "./CreateTheme";
 import CreateTopic from "./CreateTopic";
+import CreateService from "./CreateService";
 
 const gqlEndpoint =
-  "http://localhost:60000/simple/v1/cjik4uznn00040196mntauni6";
+  "http://localhost:60000/simple/v1/cjik63ptg00040168rioerccd";
 
 const populateData = async () => {
   // Add 311s
@@ -117,7 +118,6 @@ const populateData = async () => {
           contactsWithIds.find(c => c.name === department.contact.toString())
             .id;
 
-        debugger;
         const imageId =
           department.image &&
           imagesWithIds.find(i => i.filename === department.image).id;
@@ -166,7 +166,6 @@ const populateData = async () => {
 
     topicsWithIds = await Promise.all(
       topics.topics.map(topic => {
-        debugger;
         const themeId =
           topic.theme && themesWithIds.find(t => t.slug === topic.theme).id;
 
@@ -184,20 +183,45 @@ const populateData = async () => {
     console.log(e);
   }
 
-  // // Add Services
-  // let servicesWithIds;
-  // try {
-  //   fs.readdir("./data/fixtures/services/", (err, servicePaths) => {
-  //     servicePaths.forEach(filename => {
-  //       const service = yaml.safeLoad(
-  //         fs.readFileSync(`./data/fixtures/services/${filename}`, "utf8")
-  //       );
-  //       console.log(service);
-  //     });
-  //   });
-  // } catch (e) {
-  //   console.log(e);
-  // }
+  // Add Services
+  let servicesWithIds;
+  try {
+    fs.readdir("./data/fixtures/services/", async (err, servicePaths) => {
+      servicesWithIds = await Promise.all(
+        servicePaths.map(filename => {
+          const service = yaml.safeLoad(
+            fs.readFileSync(`./data/fixtures/services/${filename}`, "utf8")
+          );
+
+          const topicId =
+            service.topic &&
+            topicsWithIds.find(t => t.slug === service.topic).id;
+
+          const imageId =
+            service.image &&
+            imagesWithIds.find(i => i.filename === service.image).id;
+
+          const contactId =
+            service.contact &&
+            contactsWithIds.find(c => c.name === service.contact.toString()).id;
+
+          return CreateService(
+            gqlEndpoint,
+            service.title_en,
+            service.slug,
+            topicId,
+            service.steps_en,
+            service.dynamic_content,
+            service.additional_content_en,
+            imageId,
+            contactId
+          );
+        })
+      );
+    });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 populateData();

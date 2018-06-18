@@ -36,7 +36,7 @@ const CreateTopic = async (
     themeId
   };
   const data = await request(endpoint, query, variables);
-  return data;
+  return data.createTopic;
 };
 
 export default CreateTopic;

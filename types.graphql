@@ -3,7 +3,7 @@ type ServicePage @model {
   title: String!
   slug: String!
   topic: Topic! @relation(name: "ServicePageTopic")
-  steps: String!
+  steps: Json!
   dynamicContent: Json!
   additionalContent: String!
   image: Image @relation(name: "ServicePageImage")
