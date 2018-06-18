@@ -8,8 +8,6 @@ type ServicePage @model {
   additionalContent: String!
   image: Image @relation(name: "ServicePageImage")
   contacts: [Contact!]! @relation(name: "ServicePageContacts")
-
-  relatedServicePages: [ServicePage!]! @relation(name: "RelatedServicePages")
 }
 
 type Topic @model {

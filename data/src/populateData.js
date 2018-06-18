@@ -12,7 +12,7 @@ import CreateTopic from "./CreateTopic";
 import CreateService from "./CreateService";
 
 const gqlEndpoint =
-  "http://localhost:60000/simple/v1/cjik63ptg00040168rioerccd";
+  "http://localhost:60000/simple/v1/cjikpk1ht00040123yzs8ofzq";
 
 const populateData = async () => {
   // Add 311s
